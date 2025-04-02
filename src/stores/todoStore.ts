@@ -23,8 +23,8 @@ const useStore = create<TodoStore>((set) => ({
     add: (title) =>
         set((state) => ({
             todoList: [
-                ...state.todoList,
                 { id: state.todoList.length + 1, title, completed: false },
+                ...state.todoList,
             ],
         })),
     remove: (id) =>
