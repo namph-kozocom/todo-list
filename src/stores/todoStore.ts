@@ -2,6 +2,7 @@ import { create } from "zustand";
 import TodoType from "../types/todo.type";
 
 interface TodoStore {
+    nextId: number;
     todoList: TodoType[];
     toggleComplete: (id: number) => void;
     add: (title: string) => void;
@@ -10,6 +11,7 @@ interface TodoStore {
 }
 
 const useStore = create<TodoStore>((set) => ({
+    nextId: 3,
     todoList: [
         { id: 1, title: "Professional Work No. 1", completed: false },
         { id: 2, title: "Professional Work No. 2", completed: true },
@@ -21,12 +23,13 @@ const useStore = create<TodoStore>((set) => ({
             ),
         })),
     add: (title) =>
-        set((state) => ({
-            todoList: [
-                { id: state.todoList.length + 1, title, completed: false },
-                ...state.todoList,
-            ],
-        })),
+        set((state) => {
+            const newTodo = { id: state.nextId, title, completed: false };
+            return {
+                todoList: [newTodo, ...state.todoList],
+                nextId: state.nextId + 1,
+            };
+        }),
     remove: (id) =>
         set((state) => ({
             todoList: state.todoList.filter((todo) => todo.id !== id),

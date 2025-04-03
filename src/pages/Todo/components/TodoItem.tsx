@@ -39,8 +39,8 @@ function TodoItem({ todo }: TaskItemProps) {
   }, [isEdit]);
 
   return (
-    <li className="flex justify-between items-center py-3 border-b border-[#76B7CD]">
-      <div className="flex items-center gap-2">
+    <li className="flex gap-2 justify-between items-center py-3 border-b border-[#76B7CD]">
+      <div className="flex items-center gap-2 w-full">
         <button type="button" onClick={() => toggleComplete(todo.id)} className="text-orange-500 cursor-pointer">
           {todo.completed ? <CheckCircle size={20} /> : <Circle size={20} />}
         </button>
@@ -50,7 +50,7 @@ function TodoItem({ todo }: TaskItemProps) {
           type="text" readOnly={!isEdit}
           onChange={(e) => handleChangeTitle(e)}
           onClick={isEdit ? () => { } : () => toggleComplete(todo.id)}
-          className={`${todo.completed ? "line-through text-gray-400" : "text-gray-800"} outline-none cursor-pointer`}
+          className={`${todo.completed ? "line-through text-gray-400" : "text-gray-800"} flex-1 outline-none cursor-pointer`}
         />
       </div>
       <div className="flex items-center gap-3">
